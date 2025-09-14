@@ -2,7 +2,7 @@
   "name": "cloud",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "cap7goo@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -28,6 +28,7 @@
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/client": "latest",
     "nestjs-prisma": "^0.25.0",
@@ -76,8 +77,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
   }
 }

@@ -13,3 +13,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// История снятых показаний, собранных метрик
+model History {
+  id        Int      @id @default(autoincrement())
+  edge      String   @db.VarChar(100)
+  timestamp DateTime @default(now())
+  tag       String   @db.VarChar(100)
+  value     Decimal  @db.Decimal(16, 3)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([edge])
+  @@index([timestamp])
+  @@index([tag])
+  @@index([edge, tag])
+  @@index([edge, timestamp])
+  @@map("history")
+}
+
+// Текущие значения показаний, метрик
+model Current {
+  id        Int      @id @default(autoincrement())
+  edge      String   @db.VarChar(100)
+  tag       String   @db.VarChar(100)
+  value     Decimal  @db.Decimal(16, 3)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([edge, tag])
+  @@index([edge])
+  @@index([tag])
+  @@map("current")
+}

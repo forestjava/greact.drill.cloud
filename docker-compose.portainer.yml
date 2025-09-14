@@ -7,9 +7,11 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - nest-postgres
+      cloud-db:
     env_file:
       - .env
+    environment:
+      - NODE_ENV=production
 
   cloud-db:
     image: postgres:17
