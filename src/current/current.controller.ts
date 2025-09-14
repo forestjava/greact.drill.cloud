@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Header } from '@nestjs/common';
 import { CurrentService } from './current.service';
 import { CreateCurrentDto } from './dto/create-current.dto';
 import { UpdateCurrentDto } from './dto/update-current.dto';
 
 @Controller('current')
 export class CurrentController {
-  constructor(private readonly currentService: CurrentService) {}
+  constructor(private readonly currentService: CurrentService) { }
 
   @Post()
   create(@Body() createCurrentDto: CreateCurrentDto) {
@@ -13,11 +13,17 @@ export class CurrentController {
   }
 
   @Get()
+  @Header('Cache-Control', 'no-store')
+  @Header('Pragma', 'no-cache')
+  @Header('Expires', '0')
   findAll() {
     return this.currentService.findAll();
   }
 
   @Get(':id')
+  @Header('Cache-Control', 'no-store')
+  @Header('Pragma', 'no-cache')
+  @Header('Expires', '0')
   findOne(@Param('id') id: string) {
     return this.currentService.findOne(+id);
   }

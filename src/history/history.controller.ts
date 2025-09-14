@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Header } from '@nestjs/common';
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
 
 @Controller('history')
 export class HistoryController {
-  constructor(private readonly historyService: HistoryService) {}
+  constructor(private readonly historyService: HistoryService) { }
 
   @Post()
   create(@Body() createHistoryDto: CreateHistoryDto) {
@@ -13,11 +13,17 @@ export class HistoryController {
   }
 
   @Get()
+  @Header('Cache-Control', 'no-store')
+  @Header('Pragma', 'no-cache')
+  @Header('Expires', '0')
   findAll() {
     return this.historyService.findAll();
   }
 
   @Get(':id')
+  @Header('Cache-Control', 'no-store')
+  @Header('Pragma', 'no-cache')
+  @Header('Expires', '0')
   findOne(@Param('id') id: string) {
     return this.historyService.findOne(+id);
   }
