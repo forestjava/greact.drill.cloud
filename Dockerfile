@@ -6,12 +6,16 @@ WORKDIR /app
 
 # Копируем package.json и package-lock.json
 COPY package*.json ./
+COPY prisma ./prisma/
 
 # Устанавливаем зависимости
-RUN npm ci
+RUN npm install
 
 # Копируем исходный код
 COPY . .
+
+# Генерация Prisma клиента ?
+#RUN npm run prisma:generate
 
 # Собираем приложение
 RUN npm run build
