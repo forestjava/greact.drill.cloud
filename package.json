@@ -1,10 +1,10 @@
 {
   "name": "cloud",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "author": "cap7goo@gmail.com",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "PERSONAL",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

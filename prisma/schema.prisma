@@ -18,11 +18,10 @@ datasource db {
 model History {
   id        Int      @id @default(autoincrement())
   edge      String   @db.VarChar(100)
-  timestamp DateTime @default(now())
+  timestamp DateTime
   tag       String   @db.VarChar(100)
-  value     Decimal  @db.Decimal(16, 3)
+  value     Float
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   @@index([edge])
   @@index([timestamp])
@@ -37,7 +36,7 @@ model Current {
   id        Int      @id @default(autoincrement())
   edge      String   @db.VarChar(100)
   tag       String   @db.VarChar(100)
-  value     Decimal  @db.Decimal(16, 3)
+  value     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
