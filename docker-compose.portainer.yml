@@ -7,7 +7,7 @@ services:
     expose:
       - '3000'
     depends_on:
-      cloud-db:
+      - cloud-db
     env_file:
       - .env
     environment:
