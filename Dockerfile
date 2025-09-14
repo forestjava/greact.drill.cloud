@@ -20,8 +20,8 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-# Добавим применение миграций в БД
-RUN npm run migrate:deploy
+# Добавим применение миграций в БД ?
+# RUN npm run migrate:deploy
 
 # Команда запуска
 CMD ["npm", "run", "start:prod"]
