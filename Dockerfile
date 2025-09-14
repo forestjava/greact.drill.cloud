@@ -17,11 +17,11 @@ COPY . .
 # Генерация Prisma клиента ?
 #RUN npm run prisma:generate
 
-# Собираем приложение
-RUN npm run build
-
 # Добавим применение миграций в БД ?
 # RUN npm run migrate:deploy
+
+# Собираем приложение
+RUN npm run build
 
 # Команда запуска
 CMD ["npm", "run", "start:prod"]
