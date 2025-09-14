@@ -4,24 +4,32 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    ports:
-      - '3000:3000'
+    expose:
+      - '3000'
     depends_on:
       cloud-db:
     env_file:
       - .env
     environment:
       - NODE_ENV=production
+    networks:
+      - proxy
 
   cloud-db:
     image: postgres:17
     restart: always
-    ports:
-      - '5432:5432'
+    expose:
+      - '5432'
     env_file:
       - .env
     volumes:
       - cloud-db:/var/lib/postgresql/data
+    networks:
+      - proxy      
 
 volumes:
   cloud-db:
+
+networks:
+  proxy:
+    external: true  
