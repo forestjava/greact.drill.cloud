@@ -52,4 +52,51 @@ export class HistoryService {
       orderBy: { timestamp: 'desc' },
     });
   }
+
+  // Получить последние записи для каждого тега по указанному edge, сгруппированные по тегам
+  async findLatestByEdge(edge: string, limit: number = 20): Promise<Record<string, { timestamp: Date; value: number }[]>> {
+    type HistoryResult = {
+      tag: string;
+      timestamp: Date;
+      value: number;
+    };
+
+    const result = await this.prisma.$queryRaw<HistoryResult[]>`
+      WITH latest_records AS (
+        SELECT 
+          edge,
+          tag,
+          timestamp,
+          value,
+          ROW_NUMBER() OVER (
+            PARTITION BY edge, tag 
+            ORDER BY timestamp DESC
+          ) as rn
+        FROM history 
+        WHERE edge = ${edge}
+      )
+      SELECT 
+        tag,
+        timestamp,
+        value
+      FROM latest_records 
+      WHERE rn <= ${limit}
+      ORDER BY tag, timestamp DESC
+    `;
+
+    // Группируем результаты по тегам
+    const grouped: Record<string, { timestamp: Date; value: number }[]> = {};
+
+    for (const record of result) {
+      if (!grouped[record.tag]) {
+        grouped[record.tag] = [];
+      }
+      grouped[record.tag].push({
+        timestamp: record.timestamp,
+        value: record.value
+      });
+    }
+
+    return grouped;
+  }
 }
