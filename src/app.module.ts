@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { HistoryModule } from './history/history.module';
 import { CurrentModule } from './current/current.module';
 import { IngestModule } from './ingest/ingest.module';
+import { EdgesModule } from './edges/edges.module';
 import { CleanupService } from './cleanup/cleanup.service';
 import { PrismaService } from './prisma.service';
 
@@ -13,7 +14,8 @@ import { PrismaService } from './prisma.service';
     ScheduleModule.forRoot(),
     HistoryModule,
     CurrentModule,
-    IngestModule
+    IngestModule,
+    EdgesModule
   ],
   controllers: [AppController],
   providers: [AppService, CleanupService, PrismaService],

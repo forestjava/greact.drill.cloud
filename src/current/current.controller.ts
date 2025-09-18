@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Header, Query } from '@nestjs/common';
 import { CurrentService } from './current.service';
-import { CreateCurrentDto } from './dto/create-current.dto';
-import { UpdateCurrentDto } from './dto/update-current.dto';
+// import { CreateCurrentDto } from './dto/create-current.dto';
+// import { UpdateCurrentDto } from './dto/update-current.dto';
 import { GetCurrentDto } from './dto/get-current.dto';
 
 @Controller('current')
